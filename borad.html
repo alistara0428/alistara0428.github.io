@@ -1,0 +1,407 @@
+<html>
+    <head>
+        <title>草人能力盤</title>
+        <meta charset="utf-8">
+		<style type="text/css">
+            button {
+                background-color: #9e9e9e;
+                border: none;
+                color: white;
+                width: 75px;
+                height: 75px;
+                text-align: center;
+                border-radius: 30px;
+            }
+            .menu {
+                position: fixed;
+                left: 500px;
+                top: 82px;
+                font-size: 20px;
+            }
+            .title {
+                color: red;
+                text-align: center;
+                font-size: 60px;
+            }
+            .tr {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="title"><b>先選擇屬性再點盤</b></div>
+        <div class="menu">
+            <!--能力值區-->
+            <table cellspacing="0" border="1">
+                <tr class="tr">
+                    <td rowspan="3">剩餘AP：<span id="ap">79</span></td>
+                    <td colspan="5">
+                        <select id="attackatt">
+                            <option value="sup">恢復屬性</option>
+                            <option value="slash">斬屬性</option>
+                            <option value="blunt">打屬性</option>
+                            <option value="piercing">突屬性</option>
+                            <option value="magic">魔屬性</option>
+                        </select>
+                        <select id="element">
+                            <option value="火">火屬性</option>
+                            <option value="風">風屬性</option>
+                            <option value="地">地屬性</option>
+                            <option value="水">水屬性</option>
+							<option value="無">無屬性</option>
+                        </select>
+                    </td>
+
+                    <td colspan="4">天值：<input id="fname" onchange="Light(this.value)" value="0" /></td>
+                </tr>
+                <tr class="tr">
+                    <td>HP</td>
+                    <td id="HP" colspan="2">3448</td>
+                    <td>力量</td>
+                    <td id="力量">109</td>
+                    <td>耐力</td>
+                    <td id="耐力">105</td>
+                    <td>幸運</td>
+                    <td id="幸運">111</td>
+                </tr>
+                <tr class="tr">
+                    <td>MP</td>
+                    <td id="MP" colspan="2">411</td>
+                    <td>智力</td>
+                    <td id="智力">105</td>
+                    <td>速度</td>
+                    <td id="速度">109</td>
+                    <td>精神</td>
+                    <td id="精神">107</td>
+                </tr>
+            </table>
+            耐性：<span id='耐性'></span>
+			<br />
+			技能有：<br />
+            <span id="技能"></span>
+        </div>
+	<input type="button" value='速度一鍵配置' onclick='speedtype()'></button>
+        <div>
+            <!-能力盤>
+            <br />
+            <span class="button" ;>
+                <table background="https://i.imgur.com/23iLpHf.png" ;>		<!-- tier1-->
+                    <td>
+                        <button id="111" ; onclick="status(111,2,1,'S');">力量+2</button>
+                        <button id="112" ; onclick="status(112,2,1,'S');">力量+2</button>
+                        <button id="113" ; onclick="status(113,2,1,'S');">力量+2</button>
+                        <button id="114" ; onclick="status(114,2,1,'I');">智力+2</button>
+                        <button id="115" ; onclick="status(115,2,1,'I');">智力+2</button>
+                        <br />
+                        <br />
+                        <button id="121" ; onclick="status(121,3,1,'L');">幸運+3</button>
+                        <button id="122" ; onclick="status(122,3,1,'L');">幸運+3</button>
+                        <button id="123" ; onclick="status(123,3,1,'V');">耐力+3</button>
+                        <button id="124" ; onclick="status(124,3,1,'M');">精神+3</button>
+                        <button id="125" ; onclick="status(125,3,1,'SP');">速度+3</button>
+                        <br />
+                        <br />
+                        <button id="131" ; onclick="skill(131,'斬',1,);">技能</button>
+                        <button id="132" ; onclick="skill(132,'突',1,);">技能</button>
+                        <button id="133" ; onclick="skill(133,'打',1,);">技能</button>
+                        <button id="134" ; onclick="fixedskill(134,1);">技能</button>
+                        <button id="135" ; onclick="skill(135,'魔法',1,'');">技能</button>
+                        <br />
+                        <br />
+                        <button id="141" ; onclick="status(141,3,1,'V');">耐力+3</button>
+                        <button id="142" ; onclick="status(142,3,1,'SP');">速度+3</button>
+                        <button id="143" ; onclick="status(143,3,1,'SP');">速度+3</button>
+                        <button id="144" ; onclick="status(144,3,1,'SP');">速度+3</button>
+                        <button id="145" ; onclick="status(145,3,1,'M');">精神+3</button>
+                        <br />
+                        <br />
+                        <button id="151" ; onclick="status(151,3,1,'SP');">速度+3</button>
+                        <button id="152" ; onclick="status(152,3,1,'V');">耐力+3</button>
+                        <button id="153" ; onclick="status(153,3,1,'L');">幸運+3</button>
+                        <button id="154" ; onclick="status(154,3,1,'V');">耐力+3</button>
+                        <button id="155" ; onclick="status(155,3,1,'V');">耐力+3</button>
+                    </td>
+                </table>
+
+                <table background="https://i.imgur.com/thLoX5N.png" ;>		<!-- tier2-->
+                    <td>
+                        <button id="211" ; onclick="status(211,3,2,'M');">精神+3</button>
+                        <button id="212" ; onclick="status(212,3,2,'S');">力量+3</button>
+                        <button id="213" ; onclick="skill(213,'打',2);">技能</button>
+                        <button id="214" ; onclick="status(214,3,2,'V');">耐力+3</button>
+                        <button id="215" ; onclick="status(215,3,2,'I');">智力+3</button>
+                        <br />
+                        <br />
+                        <button id="221" ; onclick="skill(221,'斬',2);">技能</button>
+                        <button id="222" ; onclick="resistant(222,2,'水');">耐水屬性</button>
+                        <button id="223" ; onclick="status(223,3,2,'S');">力量+3</button>
+                        <button id="224" ; onclick="status(224,5,2,'I');">智力+5</button>
+                        <button id="225" ; onclick="status(225,5,2,'M');">精神+5</button>
+                        <br />
+                        <br />
+                        <button id="231" ; onclick="status(231,5,2,'S');">力量+5</button>
+                        <button id="232" ; onclick="status(232,5,2,'SP');">速度+5</button>
+                        <button id="233" ; onclick="status(233,5,2,'M');">精神+5</button>
+                        <button id="234" ; onclick="status(234,5,2,'SP');">速度+5</button>
+                        <button id="235" ; onclick="skill(235,'魔法',1,);">技能</button>
+                        <br />
+                        <br />
+                        <button id="241" ; onclick="status(241,5,2,'V');">耐力+5</button>
+                        <button id="242" ; onclick="skill(242,'突',2);">技能</button>
+                        <button id="243" ; onclick="status(243,3,2,'SP');">速度+3</button>
+                        <button id="244" ; onclick="status(244,5,2,'V');">耐力+5</button>
+                        <button id="245" ; onclick="resistant(245,2,'地');">耐地屬性</button>
+                        <br />
+                        <br />
+                        <button id="251" ; onclick="status(251,5,2,'SP');">速度+5</button>
+                        <button id="252" ; onclick="status(252,5,2,'V');">耐力+5</button>
+                        <button id="253" ; onclick="status(253,5,2,'L');">幸運+5</button>
+                        <button id="254" ; onclick="fixedskill(254,2);">技能</button>
+                        <button id="255" ; onclick="status(255,5,2,'V');">耐力+5</button>
+                    </td>
+                </table>
+
+                <table background="https://i.imgur.com/AucnPQC.png" ;>		<!-- tier3-->
+                    <td>
+                        <button id="311" ; onclick="status(311,8,3,'S');">力量+8</button>
+                        <button id="312" ; onclick="status(312,8,3,'S');">力量+8</button>
+                        <button id="313" ; onclick="status(313,8,3,'S');">力量+8</button>
+                        <button id="314" ; onclick="status(314,8,3,'I');">智力+8</button>
+                        <button id="315" ; onclick="status(315,8,3,'I');">智力+8</button>
+                        <br />
+                        <br />
+                        <button id="321" ; onclick="status(321,8,3,'M');">精神+8</button>
+                        <button id="322" ; onclick="status(322,8,3,'V');">耐力+8</button>
+                        <button id="323" ; onclick="status(323,8,3,'M');">精神+8</button>
+                        <button id="324" ; onclick="status(324,8,3,'V');">耐力+8</button>
+                        <button id="325" ; onclick="status(325,8,3,'SP');">速度+8</button>
+                        <br />
+                        <br />
+                        <button id="331" ; onclick="skill(331,'斬',3);">技能</button>
+                        <button id="332" ; onclick="skill(332,'突',3);">技能</button>
+                        <button id="333" ; onclick="skill(333,'打',3);">技能</button>
+                        <button id="334" ; onclick="fixedskill(334,3);">技能</button>
+                        <button id="335" ; onclick="skill(335,'魔法',3);">技能</button>
+                        <br />
+                        <br />
+                        <button id="341" ; onclick="status(341,10,3,'L');">幸運+10</button>
+                        <button id="342" ; onclick="status(342,10,3,'SP');">速度+10</button>
+                        <button id="343" ; onclick="status(343,10,3,'SP');">速度+10</button>
+                        <button id="344" ; onclick="status(344,10,3,'SP');">速度+10</button>
+                        <button id="345" ; onclick="status(345,10,3,'M');">精神+10</button>
+                        <br />
+                        <br />
+                        <button id="351" ; onclick="status(351,10,3,'SP');">速度+10</button>
+                        <button id="352" ; onclick="status(352,10,3,'SP');">速度+10</button>
+                        <button id="353" ; onclick="status(353,10,3,'L');">幸運+10</button>
+                        <button id="354" ; onclick="status(354,10,3,'M');">精神+10</button>
+                        <button id="355" ; onclick="status(355,10,3,'M');">精神+10</button>
+                    </td>
+                </table>
+
+                <table background="https://i.imgur.com/40PZDiT.png" ;>		<!-- tier4-->
+                    <td>
+                        <button id="411" ; onclick="status(411,10,3,'I');">智力+10</button>
+                        <button id="412" ; onclick="status(412,10,3,'V');">耐力+10</button>
+                        <button id="413" ; onclick="status(413,10,3,'M');">精神+10</button>
+                        <button id="414" ; onclick="status(414,10,3,'SP');">速度+10</button>
+                        <button id="415" ; onclick="status(415,10,3,'M');">精神+10</button>
+                        <br />
+                        <br />
+                        <button id="421" ; onclick="status(421,10,3,'M');">精神+10</button>
+                        <button id="422" ; onclick="status(422,10,3,'SP');">速度+10</button>
+                        <button id="423" ; onclick="status(423,10,3,'V');">耐力+10</button>
+                        <button id="424" ; onclick="status(424,10,3,'M');">精神+10</button>
+                        <button id="425" ; onclick="status(425,10,3,'I');">智力+10</button>
+                        <br />
+                        <br />
+                        <button id="431" ; onclick="fixedskill(431,3);">技能</button>
+                        <button id="432" ; onclick="fixedskill(432,3);">技能</button>
+                        <button id="433" ; onclick="fixedskill(433,3);">技能</button>
+                        <button id="434" ; onclick="fixedskill(434,3);">技能</button>
+                        <button id="435" ; onclick="fixedskill(435,3);">技能</button>
+                        <br />
+                        <br />
+                        <button id="441" ; onclick="status(441,20,3,'I');">智力+20</button>
+                        <button id="442" ; onclick="status(442,20,3,'V');">耐力+20</button>
+                        <button id="443" ; onclick="status(443,20,3,'S');">速度+20</button>
+                        <button id="444" ; onclick="status(444,20,3,'SP');">速度+20</button>
+                        <button id="445" ; onclick="status(445,20,3,'M');">精神+20</button>
+                        <br />
+                        <br />
+                        <button id="451" ; onclick="status(451,30,3,'I');">智力+30</button>
+                        <button id="452" ; onclick="status(452,30,3,'M');">精神+30</button>
+                        <button id="453" ; onclick="status(453,30,3,'V');">耐力+30</button>
+                        <button id="454" ; onclick="status(454,30,3,'SP');">速度+30</button>
+                        <button id="455" ; onclick="status(455,30,3,'I');">智力+30</button>
+                    </td>
+                </table>
+            </span>
+        </div>
+    </body>
+
+    <script>
+        var HP = document.getElementById("HP");
+        var MP = document.getElementById("MP");
+        var STR = document.getElementById("力量");
+        var INT = document.getElementById("智力");
+        var VIT = document.getElementById("耐力");
+        var SPD = document.getElementById("速度");
+        var LUK = document.getElementById("幸運");
+        var MEN = document.getElementById("精神");
+        var ap = document.getElementById("ap");
+
+        function status(id, x, tier, status) {		//能力盤加點
+            var btn = document.getElementById(id);
+            if (status == "S") {status = STR;}
+            if (status == "I") {status = INT;}
+            if (status == "V") {status = VIT;}
+            if (status == "SP"){status = SPD;}
+            if (status == "L") {status = LUK;}
+            if (status == "M") {status = MEN;}
+            if (btn.style.backgroundColor == "rgb(70, 222, 97)") {		//是綠色的話
+                btn.style.backgroundColor = "#9e9e9e";
+				status.innerHTML = status.innerHTML - x;
+                ap.innerHTML = ap.innerHTML - -tier;
+            } else {		//不是綠色的話
+                btn.style.backgroundColor = "#46DE61";
+				status.innerHTML = status.innerHTML - -x;
+                ap.innerHTML = ap.innerHTML - tier;
+            }
+        }
+
+        function skill(id, att, tier) {		//能力盤技能
+            var btn = document.getElementById(id);
+            var element = document.getElementById("element").value;
+            var member = "",
+                times = "",
+                debuff = "";
+            if (tier == "1") {
+                (member = "單體"), (times = "(小)");
+            } else if (tier == "2") {(member = "全體"), (times = "(小)");
+            } else {(member = "單體"), (times = "(中)"), (debuff = "+" + element + "屬性耐性15%down");
+            }
+            var skill = member + "-" + element + "屬性" + att + "攻擊" + times + debuff + "<br>";
+            var text = document.getElementById("技能");
+            var replace = text.innerHTML.replace(skill, "");
+            if (btn.style.backgroundColor == "rgb(70, 222, 97)") {
+                btn.style.backgroundColor = "#9e9e9e";
+                ap.innerHTML = ap.innerHTML - -tier;
+                document.getElementById("技能").innerHTML = replace;
+            } else {
+                btn.style.backgroundColor = "#46DE61";
+                ap.innerHTML = ap.innerHTML - tier;
+                text.innerHTML += skill;
+            }
+        }
+
+        function fixedskill(id,tier) {
+            var btn = document.getElementById(id);
+			var ele = document.getElementById('element').value;
+            var skill = "";
+            if (btn.id == "134") {skill = "回復我方全體HP(小)" + "<br>";}
+            if (btn.id == "254") {skill = "回復我方全體異常狀態" + "<br>";}
+            if (btn.id == "334") {skill = "回復我方全體HP(中)" + "<br>";}
+			if (btn.id == "431") {skill = "我方全體"+ele+"屬性攻擊力30%UP(3回合)" + "<br>";}
+			if (btn.id == "432") {skill = "我方全體"+ele+"屬性耐性50%UP(3回合)" + "<br>";}
+			if (btn.id == "433") {skill = "我方全體智力30%UP+全體敵人"+ele+"屬性攻擊力30%UP(3回合)" + "<br>";}
+            if (btn.id == "434") {skill = "回復我方全體治癒效果(大)(3回合)" + "<br>";}
+            if (btn.id == "435") {skill = "回復我方全體HP(大)" + "<br>";}
+			
+
+            var text = document.getElementById("技能");
+            var replace = text.innerHTML.replace(skill, "");
+            if (btn.style.backgroundColor == "rgb(70, 222, 97)") {
+                btn.style.backgroundColor = "#9e9e9e";
+                ap.innerHTML = ap.innerHTML - -tier;
+                document.getElementById("技能").innerHTML = replace;
+            } else {
+                btn.style.backgroundColor = "#46DE61";
+                ap.innerHTML = ap.innerHTML - tier;
+                text.innerHTML += skill;
+            }
+        }
+
+		function resistant(id,tier,ele){		//耐屬
+			var btn = document.getElementById(id);
+			var skill = '<br>'+ele+"屬性耐性提升10%";
+			var text = document.getElementById("耐性");
+            var replace = text.innerHTML.replace(skill, "");            
+			
+			
+			if (btn.style.backgroundColor == "rgb(70, 222, 97)") {		//是綠色的話
+                btn.style.backgroundColor = "#9e9e9e";
+                ap.innerHTML = ap.innerHTML - -tier;
+				console.log(replace);
+				document.getElementById("耐性").innerHTML = replace;
+            } else {		//不是綠色的話
+                btn.style.backgroundColor = "#46DE61";
+                ap.innerHTML = ap.innerHTML - tier;
+				text.innerHTML += skill;
+            }
+		}		
+		
+		function speedtype(){
+		var arr=['114','124','134','144','154','153','152','151','143','142','115','125'
+		,'214','224','234','244','254'
+		,'314','324','334','344','354','353','352','351','343','342'
+		,'414','424','434','444','454','413','423','433','443'];
+		for(i=0; i<arr.length; i++){
+		document.getElementById(arr[i]).click();
+		}}
+
+        function Light(a) {		//天值
+            var att = document.getElementById("attackatt").value;
+            var hp = 0,
+                mp = 0,
+                str = 0,
+                int = 0,
+                vit = 0,
+                spd = 0,
+                luk = 0;
+            console.log(att);
+            if (att == "sup") {
+                if (a >= 5) hp += 100;
+                if (a >= 15) vit += 10;
+                if (a >= 30) int += 10;
+                if (a >= 50) mp += 40;
+                if (a >= 75) spd += 15;
+                if (a >= 105) hp += 300;
+                if (a >= 140) vit += 20;
+                if (a >= 175) int += 25;
+                if (a >= 215) mp += 80;
+                if (a >= 255) spd += 30;
+            } else if (att == "magic") {
+                if (a >= 5) hp += 100;
+                if (a >= 15) spd += 10;
+                if (a >= 30) vit += 10;
+                if (a >= 50) int += 15;
+                if (a >= 75) mp += 60;
+                if (a >= 105) hp += 300;
+                if (a >= 140) spd += 20;
+                if (a >= 175) vit += 25;
+                if (a >= 215) int += 25;
+                if (a >= 255) mp += 100;
+            } else {
+                if (a >= 5) mp += 20;
+                if (a >= 15) spd += 10;
+                if (a >= 30) luk += 10;
+                if (a >= 50) str += 15;
+                if (a >= 75) hp += 300;
+                if (a >= 105) mp += 60;
+                if (a >= 140) spd += 20;
+                if (a >= 175) luk += 25;
+                if (a >= 215) str += 25;
+                if (a >= 255) hp += 30;
+            }
+            HP.innerHTML -= -hp;
+            MP.innerHTML -= -mp;
+            STR.innerHTML -= -str;
+            INT.innerHTML -= -int;
+            VIT.innerHTML -= -vit;
+			SPD.innerHTML -= -spd;
+            LUK.innerHTML -= -luk;
+        }
+    </script>
+</html>
