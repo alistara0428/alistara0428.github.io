@@ -81,11 +81,13 @@
 			技能有：<br />
             <span id="技能"></span>
         </div>
+	
+	<div style='font-size:20px'>我就爛<br>待辦：<br>　回復-無屬的技能<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據<br><br><br></div><br>
 	<input type="button" value='一鍵速度配置' onclick='speedtype()'></button>
 	<input type="button" value='我全都要' onclick='reset(1)'></button>
-	<input type="button" value='重置' onclick='reset(0)'></button>
-        <div>
-            <!-能力盤>
+	<input type="button" value='能力盤重置' onclick='reset(0)'></button>
+	<input type="button" value='全部重置' onclick='window.location.reload()'></button>
+        <div>  <!-- 能力盤 -->
             <br />
             <span class="button" ;>
                 <table background="https://i.imgur.com/23iLpHf.png" ;>		<!-- tier1-->
@@ -393,6 +395,8 @@
                 spd = 0,
                 luk = 0;
             console.log(att);
+			if(a>=255)document.getElementById("fname").value=255;
+			if(a<=0)document.getElementById("fname").value=0;
             if (att == "sup") {
                 if (a >= 5) hp += 100;
                 if (a >= 15) vit += 10;
