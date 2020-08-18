@@ -30,7 +30,7 @@
     </head>
 
     <body>
-        <div class="title"><b>先選擇屬性再點盤</b></div>
+        <div class="title"><b>先選擇屬性、輸入天值再點盤</b></div>
         <div class="menu">
             <!--能力值區-->
             <table cellspacing="0" border="1">
@@ -82,7 +82,7 @@
             <span id="技能"></span>
         </div>
 	
-	<div style='font-size:20px'>我就爛<br>待辦：<br>　回復-無屬的技能<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據<br><br><br></div><br>
+	<div style='font-size:20px'>我就爛<br>待辦：<br>　回復-無屬的技能<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據(某種程度完成?)<br><br><br></div><br>
 	<input type="button" value='一鍵速度配置' onclick='speedtype()'></button>
 	<input type="button" value='我全都要' onclick='reset(1)'></button>
 	<input type="button" value='能力盤重置' onclick='reset(0)'></button>
@@ -431,13 +431,13 @@
                 if (a >= 215) str += 25;
                 if (a >= 255) hp += 30;
             }
-            HP.innerHTML -= -hp;
-            MP.innerHTML -= -mp;
-            STR.innerHTML -= -str;
-            INT.innerHTML -= -int;
-            VIT.innerHTML -= -vit;
-			SPD.innerHTML -= -spd;
-            LUK.innerHTML -= -luk;
+            HP.innerHTML = 3448+hp;
+            MP.innerHTML = 411+mp;
+            STR.innerHTML = 109+str;
+            INT.innerHTML = 105+int;
+            VIT.innerHTML = 105+vit;
+			SPD.innerHTML = 109+spd;
+            LUK.innerHTML = 111+luk;
         }
     </script>
 </html>
