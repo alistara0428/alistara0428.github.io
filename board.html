@@ -37,7 +37,7 @@
                 <tr class="tr">
                     <td rowspan="3" width="140px">剩餘AP：<span id="ap">79</span></td>
                     <td colspan="5">
-                        <select id="attackatt" onchange="reset(0),change()">
+                        <select id="attackatt" onchange="reset(0),change(),Light(document.getElementById('fname').value)">
                             <option value="sup">恢復屬性</option>
                             <option value="斬">斬屬性</option>
                             <option value="打">打屬性</option>
@@ -241,7 +241,7 @@
                         <br />
                         <button value="1" id="441" ; onclick="status(441,20,3,'I');">智力+20</button>
                         <button value="1" id="442" ; onclick="status(442,20,3,'V');">耐力+20</button>
-                        <button value="1" id="443" ; onclick="status(443,20,3,'S');">速度+20</button>
+                        <button value="1" id="443" ; onclick="status(443,20,3,'SP');">速度+20</button>
                         <button value="1" id="444" ; onclick="status(444,20,3,'SP');">速度+20</button>
                         <button value="1" id="445" ; onclick="status(445,20,3,'M');">精神+20</button>
                         <br />
