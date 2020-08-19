@@ -39,17 +39,17 @@
                     <td colspan="5">
                         <select id="attackatt">
                             <option value="sup">恢復屬性</option>
-                            <option value="slash">斬屬性</option>
-                            <option value="blunt">打屬性</option>
-                            <option value="piercing">突屬性</option>
+                            <option value="斬">斬屬性</option>
+                            <option value="打">打屬性</option>
+                            <option value="突">突屬性</option>
                             <option value="magic">魔屬性</option>
                         </select>
                         <select id="element">
+							<option value="無">無屬性</option>						
                             <option value="火">火屬性</option>
                             <option value="風">風屬性</option>
                             <option value="地">地屬性</option>
                             <option value="水">水屬性</option>
-							<option value="無">無屬性</option>
                         </select>
                     </td>
 
@@ -82,7 +82,7 @@
             <span id="技能"></span>
         </div>
 	
-	<div style='font-size:20px'>我就爛<br>待辦：<br>　回復-無屬的技能<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據(某種程度完成?)<br><br><br></div><br>
+	<div style='font-size:20px'>我就爛<br>待辦：<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據(某種程度完成?)<br><br><br></div><br>
 	<input type="button" value='一鍵速度配置' onclick='speedtype()'></button>
 	<input type="button" value='我全都要' onclick='reset(1)'></button>
 	<input type="button" value='能力盤重置' onclick='reset(0)'></button>
@@ -148,7 +148,7 @@
                         <button value='1' id="232" ; onclick="status(232,5,2,'SP');">速度+5</button>
                         <button value='1' id="233" ; onclick="status(233,5,2,'M');">精神+5</button>
                         <button value='1' id="234" ; onclick="status(234,5,2,'SP');">速度+5</button>
-                        <button value='1' id="235" ; onclick="skill(235,'魔法',1,);">技能</button>
+                        <button value='1' id="235" ; onclick="skill(235,'魔法',2,);">技能</button>
                         <br />
                         <br />
                         <button value='1' id="241" ; onclick="status(241,5,2,'V');">耐力+5</button>
@@ -166,7 +166,7 @@
                     </td>
                 </table>
 
-                <table background="https://i.imgur.com/AucnPQC.png" ;>		<!-- tier3-->
+                <table background="https://i.imgur.com/AucnPQC.png" >		<!-- tier3-->
                     <td>
                         <button value='1' id="311" ; onclick="status(311,8,3,'S');">力量+8</button>
                         <button value='1' id="312" ; onclick="status(312,8,3,'S');">力量+8</button>
@@ -204,7 +204,7 @@
                     </td>
                 </table>
 
-                <table background="https://i.imgur.com/40PZDiT.png" ;>		<!-- tier4-->
+                <table background="https://i.imgur.com/40PZDiT.png" >		<!-- tier4-->
                     <td>
                         <button value='1' id="411" ; onclick="status(411,10,3,'I');">智力+10</button>
                         <button value='1' id="412" ; onclick="status(412,10,3,'V');">耐力+10</button>
@@ -254,7 +254,7 @@
         var SPD = document.getElementById("速度");
         var LUK = document.getElementById("幸運");
         var MEN = document.getElementById("精神");
-        var ap = document.getElementById("ap");		
+        var ap = document.getElementById("ap");	
 
 		function btnchange(id, tier){		//改變按鍵顏色
 		var btn = document.getElementById(id);
@@ -268,7 +268,7 @@
 		}
 
 		function reset(val){		//重置
-        
+
 		for (i = 111, x = 0; x < 4; i += 50, x++)
             for (i, y = 0; y < 5; i += 5, y++) {
                 for (i, z = 0; z < 5; i++, z++) {
@@ -300,46 +300,69 @@
 			}
         }
 
-        function skill(id, att, tier) {		//能力盤技能
-            var btn = document.getElementById(id);
-            var element = document.getElementById("element").value;
-            var member = "",
-                times = "",
-                debuff = "";
-            if (tier == "1") {
-                (member = "單體"), (times = "(小)");
-            } else if (tier == "2") {(member = "全體"), (times = "(小)");
-            } else {(member = "單體"), (times = "(中)"), (debuff = "+" + element + "屬性耐性15%down");
-            }
-            var skill = member + "-" + element + "屬性" + att + "攻擊" + times + debuff + "<br>";
-            var text = document.getElementById("技能");
-            var replace = text.innerHTML.replace(skill, "");
-            
+		function skill(id, att, tier) {		//能力盤技能
+			var btn = document.getElementById(id);
+			var ele = document.getElementById("element").value;
+			var member = "",
+				times = "",
+				debuff = "",
+				skill = '';
+			var array = { 
+			tier1 :'單體-'+ele+'屬性'+att+'攻擊(小)'+'<br>',
+			tier2 : '全體-'+ele+'屬性'+att+'攻擊(小)'+'<br>',
+			tier3 : '單體-'+ele+'屬性'+att+'攻擊(中)'+"+" + ele + "屬性耐性15%down"+'<br>',
+			nonetier1 : '給予單一敵人2次'+att+'攻擊 (小)'+'<br>',
+			nonetier2 : '給予單一敵人'+att+'攻擊(中)+'+att+'耐性15%DOWN(3回合)'+'<br>',
+			nonetier3 : '給予全體敵人'+att+'+攻擊(中)'+'<br>',
+			
+			};
+			console.log(ele);
+			if (tier == "1" && ele !=='無') {skill=array["tier1"]};
+			if (tier == "2" && ele !=='無') {skill=array["tier2"]};
+			if (tier == "3" && ele !=='無') {skill=array["tier3"]};
+			if (tier == "1" && ele =='無') {skill=array["nonetier1"]};
+			if (tier == "2" && ele =='無') {skill=array["nonetier2"]};
+			if (tier == "3" && ele =='無') {skill=array["nonetier3"]};		
+						
+			var text = document.getElementById("技能");
+			var replace = text.innerHTML.replace(skill, "");
+
 			btnchange(id, tier);
 
-			if(btn.value=='1'){
-			text.innerHTML += skill;
-			btn.value=0;
+			if (btn.value == "1") {
+				text.innerHTML += skill;
+				btn.value = 0;
+			} else {
+				document.getElementById("技能").innerHTML = replace;
+				btn.value = 1;
 			}
-			else{
-			document.getElementById("技能").innerHTML = replace;
-			btn.value=1;
-			}
-        }
+		}
+
 
         function fixedskill(id,tier) {
             var btn = document.getElementById(id);
-			var ele = document.getElementById('element').value;
+			var ele = document.getElementById("element").value;
             var skill = "";
+			var array = { 
+			e431 : '我方全體'+ele+'屬性攻擊力30%UP(3回合)' + '<br>',
+			e432 : '我方全體'+ele+"屬性耐性50%UP(3回合)" + "<br>",
+			e433 : '我方全體智力30%UP+全體敵人'+ele+"屬性攻擊力30%UP(3回合)" + "<br>",
+			n431 : '我方全體無屬性物理攻擊上升50%（3回合）'+ "<br>",
+			n432 : '我方全體物理耐性上升30%（3回合）'+ "<br>",
+			n433 : '我方全體腕力上升30%+敵方全體物理耐性下降30%'+ "<br>",
+			};
             if (btn.id == "134") {skill = "回復我方全體HP(小)" + "<br>";}
             if (btn.id == "254") {skill = "回復我方全體異常狀態" + "<br>";}
             if (btn.id == "334") {skill = "回復我方全體HP(中)" + "<br>";}
-			if (btn.id == "431") {skill = "我方全體"+ele+"屬性攻擊力30%UP(3回合)" + "<br>";}
-			if (btn.id == "432") {skill = "我方全體"+ele+"屬性耐性50%UP(3回合)" + "<br>";}
-			if (btn.id == "433") {skill = "我方全體智力30%UP+全體敵人"+ele+"屬性攻擊力30%UP(3回合)" + "<br>";}
             if (btn.id == "434") {skill = "回復我方全體治癒效果(大)(3回合)" + "<br>";}
             if (btn.id == "435") {skill = "回復我方全體HP(大)" + "<br>";}
 			
+			if (btn.id == "431" && ele !=='無') {skill=array["e431"]};
+			if (btn.id == "432" && ele !=='無') {skill=array["e432"]};
+			if (btn.id == "433" && ele !=='無') {skill=array["e433"]};
+			if (btn.id == "431" && ele =='無') {skill=array["n431"]};
+			if (btn.id == "432" && ele =='無') {skill=array["n432"]};
+			if (btn.id == "433" && ele =='無') {skill=array["n433"]};					
 
             var text = document.getElementById("技能");
             var replace = text.innerHTML.replace(skill, "");
@@ -395,6 +418,7 @@
                 spd = 0,
                 luk = 0;
             console.log(att);
+			reset(0);
 			if(a>=255)document.getElementById("fname").value=255;
 			if(a<=0)document.getElementById("fname").value=0;
             if (att == "sup") {
