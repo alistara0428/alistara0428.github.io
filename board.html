@@ -35,17 +35,17 @@
             <!--能力值區-->
             <table cellspacing="0" border="1">
                 <tr class="tr">
-                    <td rowspan="3" width=120px>剩餘AP：<span id="ap">79</span></td>
+                    <td rowspan="3" width=140px>剩餘AP：<span id="ap">79</span></td>
                     <td colspan="5">
-                        <select id="attackatt">
+                        <select id="attackatt" onchange='reset(0)'>
                             <option value="sup">恢復屬性</option>
-                            <option value="斬">斬屬性</option>
-                            <option value="打">打屬性</option>
-                            <option value="突">突屬性</option>
+                            <option value="atk">斬屬性</option>
+                            <option value="atk">打屬性</option>
+                            <option value="atk">突屬性</option>
                             <option value="magic">魔屬性</option>
                         </select>
-                        <select id="element">
-							<option value="無">無屬性</option>
+                        <select id="element" onchange='reset(0)'>
+							<option value="無">無屬性</option>						
                             <option value="火">火屬性</option>
                             <option value="風">風屬性</option>
                             <option value="地">地屬性</option>
@@ -82,8 +82,8 @@
             <span id="技能"></span>
         </div>
 	
-	<div style='font-size:20px'>我就爛<br>待辦：<br>　攻擊&魔法的屬性&無屬的盤&技能<br>　種子&肥料<br>　天值洗數據(某種程度完成?)<br><br><br></div><br>
-	<input type="button" value='一鍵速度配置' onclick='speedtype()'></button>
+	<div style='font-size:20px'>我就爛<br>待辦：<br>　攻擊能力盤 攻擊無屬技能<br>　魔法屬性/無屬技能<br>　種子&肥料<br>　點第二次全要會出事<br></div><br>
+	<input type="button" value='非攻擊系一鍵速度配置' onclick='speedtype()'></button>
 	<input type="button" value='我全都要' onclick='reset(1)'></button>
 	<input type="button" value='能力盤重置' onclick='reset(0)'></button>
 	<input type="button" value='全部重置' onclick='window.location.reload()'></button>
@@ -268,7 +268,7 @@
 		}
 
 		function reset(val){		//重置
-
+		document.getElementById('技能').innerHTML='';
 		for (i = 111, x = 0; x < 4; i += 50, x++)
             for (i, y = 0; y < 5; i += 5, y++) {
                 for (i, z = 0; z < 5; i++, z++) {
@@ -303,27 +303,31 @@
 		function skill(id, att, tier) {		//能力盤技能
 			var btn = document.getElementById(id);
 			var ele = document.getElementById("element").value;
+			var atk = document.getElementById("attackatt").value;
 			var member = "",
 				times = "",
 				debuff = "",
 				skill = '';
 			var array = { 
-			tier1 :'單體-'+ele+'屬性'+att+'攻擊(小)'+'<br>',
-			tier2 : '全體-'+ele+'屬性'+att+'攻擊(小)'+'<br>',
-			tier3 : '單體-'+ele+'屬性'+att+'攻擊(中)'+"+" + ele + "屬性耐性15%down"+'<br>',
-			nonetier1 : '給予單一敵人2次'+att+'攻擊 (小)'+'<br>',
-			nonetier2 : '給予單一敵人'+att+'攻擊(中)+'+att+'耐性15%DOWN(3回合)'+'<br>',
-			nonetier3 : '給予全體敵人'+att+'+攻擊(中)'+'<br>',
+				tier1 :'單體-'+ele+'屬性'+att+'攻擊(小)'+'<br>', //tier1~3 攻擊&回復 效果相同
+				tier2 : '全體-'+ele+'屬性'+att+'攻擊(小)'+'<br>',
+				tier3 : '單體-'+ele+'屬性'+att+'攻擊(中)'+" + " + ele + "屬性耐性15%down"+'<br>',
+				sup_none_tier1 : '給予單一敵人2次'+att+'攻擊 (小)'+'<br>',
+				sup_none_tier2 : '給予單一敵人'+att+'攻擊(中) + '+`${ att == '魔法' ? '全屬性' : att}`+'耐性15%DOWN(3回合)'+'<br>',
+				sup_none_tier3 : '給予全體敵人'+att+' + 攻擊(中)'+'<br>',
+				magic_none_tier1 : 'mag1'+'<br>',
+				magic_none_tier2 : 'mag2'+'<br>',
+				magic_none_tier3 : 'mag3'+'<br>',
+				atk_none_tier1 : 'atk1'+'<br>',
+				atk_none_tier2 : 'atk2'+'<br>',
+				atk_none_tier3 : 'atk3'+'<br>',
+			};		
 			
-			};
-			console.log(ele);
-			if (tier == "1" && ele !=='無') {skill=array["tier1"]};
-			if (tier == "2" && ele !=='無') {skill=array["tier2"]};
-			if (tier == "3" && ele !=='無') {skill=array["tier3"]};
-			if (tier == "1" && ele =='無') {skill=array["nonetier1"]};
-			if (tier == "2" && ele =='無') {skill=array["nonetier2"]};
-			if (tier == "3" && ele =='無') {skill=array["nonetier3"]};		
-						
+			skill=array[`${
+			atk =="sup" && ele =="無" ? 'sup_none_' : 
+			atk=="magic"&&ele=="無" ? 'magic_none_': 
+			atk =="atk" && ele =="無" ? 'sup_none_' :''}`+'tier'+tier];
+			
 			var text = document.getElementById("技能");
 			var replace = text.innerHTML.replace(skill, "");
 
@@ -343,27 +347,34 @@
             var btn = document.getElementById(id);
 			var ele = document.getElementById("element").value;
             var skill = "";
+
+			
 			var array = { 
-			e431 : '我方全體'+ele+'屬性攻擊力30%UP(3回合)' + '<br>',
-			e432 : '我方全體'+ele+"屬性耐性50%UP(3回合)" + "<br>",
-			e433 : '我方全體智力30%UP+全體敵人'+ele+"屬性攻擊力30%UP(3回合)" + "<br>",
-			n431 : '我方全體無屬性物理攻擊上升50%（3回合）'+ "<br>",
-			n432 : '我方全體物理耐性上升30%（3回合）'+ "<br>",
-			n433 : '我方全體腕力上升30%+敵方全體物理耐性下降30%'+ "<br>",
+			ele_sup431 : '我方全體'+ele+'屬性攻擊力30%UP(3回合)' + '<br>',
+			ele_sup432 : '我方全體'+ele+"屬性耐性50%UP(3回合)" + "<br>",
+			ele_sup433 : '我方全體智力30%UP+全體敵人'+ele+"屬性攻擊力30%UP(3回合)" + "<br>",
+			none_sup431 : '我方全體無屬性物理攻擊上升50%（3回合）'+ "<br>",
+			none_sup432 : '我方全體物理耐性上升30%（3回合）'+ "<br>",
+			none_sup433 : '我方全體腕力上升30% + 敵方全體物理耐性下降30%'+ "<br>",
+			ele_atk431 :''+ "<br>",
+			ele_atk432 :''+ "<br>",
+			ele_atk433 :''+ "<br>",
+			ele_atk434 :''+ "<br>",
+			ele_atk435 :''+ "<br>",
+			none_atk431 :''+ "<br>",
+			none_atk432 :''+ "<br>",
+			none_atk433 :''+ "<br>",
+			none_atk434 :''+ "<br>",
+			none_atk435 :''+ "<br>",
 			};
-            if (btn.id == "134") {skill = "回復我方全體HP(小)" + "<br>";}
+            skill=array[`${ele !== '無' ? 'ele_sup' : ele =='無' ? 'none_sup' :''}${id}`];
+			
+			if (btn.id == "134") {skill = "回復我方全體HP(小)" + "<br>";}
             if (btn.id == "254") {skill = "回復我方全體異常狀態" + "<br>";}
             if (btn.id == "334") {skill = "回復我方全體HP(中)" + "<br>";}
-            if (btn.id == "434") {skill = "回復我方全體治癒效果(大)(3回合)" + "<br>";}
+			if (btn.id == "434") {skill = "回復我方全體治癒效果(大)(3回合)" + "<br>";}
             if (btn.id == "435") {skill = "回復我方全體HP(大)" + "<br>";}
-			
-			if (btn.id == "431" && ele !=='無') {skill=array["e431"]};
-			if (btn.id == "432" && ele !=='無') {skill=array["e432"]};
-			if (btn.id == "433" && ele !=='無') {skill=array["e433"]};
-			if (btn.id == "431" && ele =='無') {skill=array["n431"]};
-			if (btn.id == "432" && ele =='無') {skill=array["n432"]};
-			if (btn.id == "433" && ele =='無') {skill=array["n433"]};					
-
+						
             var text = document.getElementById("技能");
             var replace = text.innerHTML.replace(skill, "");
 			
