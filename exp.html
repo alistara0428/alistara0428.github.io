@@ -18,6 +18,17 @@
 		<br/>
 		<div >可愛草人會提升：<span id='light' style='font-size:50'> </span>天值</div>
 
+
+		<hr>
+		<div>可愛的龍槍"召龍禱儀"輸出值：<span id="damage">0</span></div>
+		<div>
+		<label>精神：</label><input type="number" id='spr' onchange="sprdam(this.value)">
+		</div>
+		<br/>
+		精神回推輸出值：
+		<div>精神：<span id="spr2">0</span></div>
+		<label>輸出：</label><input type="number" id='damage2' onchange="madrps(this.value)">
+		</div>
     </body>
 
     <script>
@@ -27,6 +38,15 @@
 		var mid = document.getElementById("mid").value;
 		var bot = document.getElementById("bot").value;		
 		light.innerHTML = Math.floor((top*500000+mid*50000+bot*5000)/18835000);
+		}
+		
+		function sprdam(spr){
+		if (spr > 330) spr=330;
+		if (spr < 1) spr=1;
+		document.getElementById("damage").innerHTML = Math.floor(15000+(300000-15000)*Math.pow((spr-1)/(330-1),5));
+		}
+		function madrps(dam){
+		document.getElementById("spr2").innerHTML = Math.ceil(Math.pow((dam-15000)/(300000-15000),1/5)*329)+1;
 		}
     </script>
 </html>
