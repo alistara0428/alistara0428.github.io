@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>草人吃你多少卷軸</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+	<div>卷軸數量：持有物/強化道具</div>
+	<br/>
+	<div>
+		<label>下級：</label>
+		<input type="number" id='bot' value='0' onchange="number()">
+		<label>中級：</label>
+		<input type="number" id='mid' value='0' onchange="number()">
+		<label>上級：</label>
+		<input type="number" id='top' value='0' onchange="number()">
+	</div>
+		<br/>
+		<div >可愛草人會提升：<span id='light' style='font-size:50'> </span>天值</div>
+
+    </body>
+
+    <script>
+		var light = document.getElementById("light");
+		function number(){
+		var top = document.getElementById("top").value;
+		var mid = document.getElementById("mid").value;
+		var bot = document.getElementById("bot").value;		
+		light.innerHTML = Math.floor((top*500000+mid*50000+bot*5000)/18835000);
+		}
+    </script>
+</html>
