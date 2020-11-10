@@ -25,10 +25,22 @@
 		<label>精神：</label><input type="number" id='spr' onchange="sprdam(this.value)">
 		</div>
 		<br/>
-		精神回推輸出值：
+		回推輸出值：
+
+		<div><label>輸出：</label><input type="number" id='damage2' onchange="madrps(this.value)"></div>
 		<div>精神：<span id="spr2">0</span></div>
-		<label>輸出：</label><input type="number" id='damage2' onchange="madrps(this.value)">
+
+		<br/>
+	<hr>
+		<div>AS拉蒂卡的輸出值：<span id="damage_la">0</span></div>
+		<div>
+		<label>幸運：</label><input type="number" id='luk_la' onchange="luk_la_dam(this.value)">
 		</div>
+		<br/>
+		回推輸出值：
+		<div><label>輸出：</label><input type="number" id='damage2_la' onchange="al_madrps(this.value)">	</div>
+		<div>幸運：<span id="luk2_la">0</span></div>
+		
     </body>
 
     <script>
@@ -48,5 +60,14 @@
 		function madrps(dam){
 		document.getElementById("spr2").innerHTML = Math.ceil(Math.pow((dam-15000)/(300000-15000),1/5)*329)+1;
 		}
+		function luk_la_dam(luk){
+		if (luk > 330) luk=330;
+		if (luk < 1) luk=1;
+		document.getElementById("damage_la").innerHTML = Math.floor(15000+(200000-15000)*Math.pow((luk-1)/(330-1),5));
+		}
+		function al_madrps(dam){
+		document.getElementById("luk2_la").innerHTML = Math.ceil(Math.pow((dam-15000)/(200000-15000),1/5)*329)+1;
+		}
     </script>
+
 </html>
