@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>物防測量器</title>
+    <meta charset="utf-8">
+</head>
+
+<div>
+    <button onclick='window.location.reload()' ;>重新來一遍</button><br>
+
+    <label>力量：</label>
+    <input id="power" ;><br>
+    <label>腕力：</label>
+    <input id="str" ;><br>
+    <label>輸入第一次傷害值：</label>
+    <input onchange="dam(this.value)" ;><br>
+    <label>接下來的傷害值：</label>
+    <input id="gogo" onchange="damA(this.value)" ;><br>
+    <div>
+        <br>
+        可能的防禦力：<span id="defense"> </span>
+        <br></br>
+        <span id="damage"> </span>
+    </div>
+</div>
+</body>
+
+<script>
+    var damage = document.getElementById("damage");
+    var defense = document.getElementById("defense");
+    var gogo = document.getElementById("gogo");
+
+    DEF = 0;
+    d1 = [];
+    d2 = [];
+
+    function consol() {
+        a = "---分隔線---"
+        console.log(a);
+        console.log(d1);
+        console.log(d2);
+    }
+
+    function dam(val) {
+        power = document.getElementById("power").value;
+        str = document.getElementById("str").value;
+        d1 = [];
+        damage.innerHTML = val + '<br>';
+
+        for (i = 16; i < 48; i++) {
+            while (DEF <= str * 2) {
+                DEF++;
+                tDMG = Math.floor(Math.floor((power - DEF / 2) * (str / 32 + 1) * 1.75 + power * i / 25.6) * 1);
+                if (tDMG == val) {
+                    d1.push(DEF);
+                }
+            }
+            DEF = 0;
+        }
+        defense.innerHTML = d1;
+    }
+
+    function damA(val) {
+        var power = document.getElementById("power").value;
+        var str = document.getElementById("str").value;
+        damage.innerHTML += val + '<br>';
+
+        for (i = 16; i < 48; i++) {
+            for (a = 0; a < d1.length; a++) {
+                DEF = d1[a];
+                tDMG = Math.floor(Math.floor((power - DEF / 2) * (str / 32 + 1) * 1.75 + power * i / 25.6) * 1);
+                if (tDMG == val) {
+                    d2.push(DEF);
+                }
+            }
+
+        }
+        d1 = d2;
+        d2 = [];
+        defense.innerHTML = d1;
+        gogo.value = '';
+    }
+</script>
+
+</html>
