@@ -17,17 +17,17 @@
 	<div style="color:red" onclick='document.location.href="https://forum.gamer.com.tw/C.php?bsn=29220&snA=5301"'>點我進入使用說明 </div>
 	<div style="color:green">簡易說明：使用普攻、無弱點耐性、無buff / debuff(含靈晶裝備)</div><br>
     <label>力量：</label>
-    <input id="power" ;><br>
+		<input id="power" ;><br>
     <label>腕力：</label>
-    <input id="str" ;><br>
+		<input id="str" ;><br>
     <label>輸入第一次傷害值：</label>
-    <input onchange="dam(this.value)" ;><br>
+		<input onchange="dam(this.value)" ;><br>
     <label>接下來的傷害值：</label>
-    <input id="gogo" onchange="damA(this.value)" ;><br>
+		<input id="gogo" onchange="damA(this.value)" ;><br>
     <div>
         <br>
         可能的防禦力：<span id="defense"> </span>
-        <br></br>
+        <br/>
         <span id="damage"> </span>
     </div>
 </div>
@@ -39,20 +39,13 @@
     var gogo = document.getElementById("gogo");
 
     DEF = 0;
-    d1 = [];
-    d2 = [];
-
-    function consol() {
-        a = "---分隔線---"
-        console.log(a);
-        console.log(d1);
-        console.log(d2);
-    }
+    a1 = [];
+    a2 = [];
 
     function dam(val) {
         power = document.getElementById("power").value;
         str = document.getElementById("str").value;
-        d1 = [];
+        a1 = [];
         damage.innerHTML = val + '<br>';
 
         for (i = 16; i < 48; i++) {
@@ -60,12 +53,12 @@
                 DEF++;
                 tDMG = Math.floor(Math.floor((power - DEF / 2) * (str / 32 + 1) * 1.75 + power * i / 25.6) * 1);
                 if (tDMG == val) {
-                    d1.push(DEF);
+                    a1.push(DEF);
                 }
             }
             DEF = 0;
         }
-        defense.innerHTML = d1;
+        defense.innerHTML = a1;
     }
 
     function damA(val) {
@@ -74,18 +67,18 @@
         damage.innerHTML += val + '<br>';
 
         for (i = 16; i < 48; i++) {
-            for (a = 0; a < d1.length; a++) {
-                DEF = d1[a];
+            for (a = 0; a < a1.length; a++) {
+                DEF = a1[a];
                 tDMG = Math.floor(Math.floor((power - DEF / 2) * (str / 32 + 1) * 1.75 + power * i / 25.6) * 1);
                 if (tDMG == val) {
-                    d2.push(DEF);
+                    a2.push(DEF);
                 }
             }
 
         }
-        d1 = d2;
-        d2 = [];
-        defense.innerHTML = d1;
+        a1 = a2;
+        a2 = [];
+        defense.innerHTML = a1;
         gogo.value = '';
     }
 </script>
