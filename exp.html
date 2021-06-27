@@ -39,7 +39,9 @@
 		輸出值回推幸運：
 		<div><label>輸出：</label><input type="number" id='damage2_la' onchange="al_madrps(this.value)">	</div>
 		<div>幸運：<span id="luk2_la">0</span></div>
-		
+	<hr>
+		<div>極簡計算：<input type="number" id='overtake' onchange="speedovertake(this.value)"></div>
+		<div>超車速度需要：<span id="overtake_result">0</span></div>
     </body>
 
     <script>
@@ -66,6 +68,9 @@
 		}
 		function al_madrps(dam){
 		document.getElementById("luk2_la").innerHTML = Math.ceil(Math.pow((dam-15000)/(200000-15000),1/5)*329)+1;
+		}
+		function speedovertake(speed){
+		document.getElementById("overtake_result").innerHTML = Math.ceil(speed/0.9*1.1);
 		}
     </script>
 
