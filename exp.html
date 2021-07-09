@@ -40,38 +40,75 @@
 		<div><label>輸出：</label><input type="number" id='damage2_la' onchange="al_madrps(this.value)">	</div>
 		<div>幸運：<span id="luk2_la">0</span></div>
 	<hr>
-		<div>極簡計算：<input type="number" id='overtake' onchange="speedovertake(this.value)"></div>
-		<div>超車速度需要：<span id="overtake_result">0</span></div>
+		<div>極簡穩超速度計算：</div>
+		<div>　指定速度：<input type="number" id='overtake' onchange="speedovertake(this.value)"></div>
+		<div>　超車速度需要：<span id="overtake_result">0</span></div>
+	<hr>
+		臉黑法超車計算機：
+		<br/>
+		<label>　速度慢的：</label>
+		<input type="number" id='slow' value='0' onchange="speedovertake2()"><br>
+		<label>　速度快的：</label>
+		<input type="number" id='fast' value='0' onchange="speedovertake2()"><br>
+		<div >　超車頻率 = <span id='frequency'　 style='font-size:24'> </span></div>		
+		
     </body>
 
-    <script>
-		var light = document.getElementById("light");
-		function number(){
-		var top = document.getElementById("top").value;
-		var mid = document.getElementById("mid").value;
-		var bot = document.getElementById("bot").value;		
-		light.innerHTML = Math.floor((top*500000+mid*50000+bot*5000)/18835000);
+    <script>		
+		function number() {
+			var top = document.getElementById("top").value;
+			var mid = document.getElementById("mid").value;
+			var bot = document.getElementById("bot").value;
+			var light = document.getElementById("light");
+			light.innerHTML = Math.floor((top * 500000 + mid * 50000 + bot * 5000) / 18835000);
 		}
-		
-		function sprdam(spr){
-		if (spr > 330) spr=330;
-		if (spr < 1) spr=1;
-		document.getElementById("damage").innerHTML = Math.floor(15000+(300000-15000)*Math.pow((spr-1)/(330-1),5));
+
+		function sprdam(spr) {
+			if (spr > 330) spr = 330;
+			if (spr < 1) spr = 1;
+			document.getElementById("damage").innerHTML = Math.floor(15000 + (300000 - 15000) * Math.pow((spr - 1) / (330 - 1), 5));
 		}
-		function madrps(dam){
-		document.getElementById("spr2").innerHTML = Math.ceil(Math.pow((dam-15000)/(300000-15000),1/5)*329)+1;
+
+		function madrps(dam) {
+			document.getElementById("spr2").innerHTML = Math.ceil(Math.pow((dam - 15000) / (300000 - 15000), 1 / 5) * 329) + 1;
 		}
-		function luk_la_dam(luk){
-		if (luk > 330) luk=330;
-		if (luk < 1) luk=1;
-		document.getElementById("damage_la").innerHTML = Math.floor(15000+(200000-15000)*Math.pow((luk-1)/(330-1),5));
+
+		function luk_la_dam(luk) {
+			if (luk > 330) luk = 330;
+			if (luk < 1) luk = 1;
+			document.getElementById("damage_la").innerHTML = Math.floor(15000 + (200000 - 15000) * Math.pow((luk - 1) / (330 - 1), 5));
 		}
-		function al_madrps(dam){
-		document.getElementById("luk2_la").innerHTML = Math.ceil(Math.pow((dam-15000)/(200000-15000),1/5)*329)+1;
+
+		function al_madrps(dam) {
+			document.getElementById("luk2_la").innerHTML = Math.ceil(Math.pow((dam - 15000) / (200000 - 15000), 1 / 5) * 329) + 1;
 		}
-		function speedovertake(speed){
-		document.getElementById("overtake_result").innerHTML = Math.floor(speed/0.9*1.1)+1;
+
+		function speedovertake(speed) {
+			document.getElementById("overtake_result").innerHTML = Math.floor(speed / 0.9 * 1.1) + 1;
 		}
+
+		function speedovertake2() {
+			var frequency = document.getElementById("frequency");
+			var slow = document.getElementById("slow").value;
+			var fast = document.getElementById("fast").value;
+			var overtake = 0;
+			for (i = 0; i < 500000; i++) {
+				r1 = Math.random()
+				r2 = Math.random()
+				if (r1 >= 0.5) {
+					s1 = slow * (1.0 + (1.0 - Math.sqrt(2.0 - 2.0 * r1)) / 10.0); //亂數決定速度 
+				} else {
+					s1 = slow * (1.0 + (Math.sqrt(2.0 * r1) - 1.0) / 10.0);
+				}
+				if (r2 >= 0.5) {
+					s2 = fast * (1.0 + (1.0 - Math.sqrt(2.0 - 2.0 * r2)) / 10.0);
+				} else {
+					s2 = fast * (1.0 + (Math.sqrt(2.0 * r2) - 1.0) / 10.0);
+				}
+				if (s1 > s2) overtake++;
+			}
+			frequency.innerHTML = overtake / 500000 * 100 + "%";
+		};
     </script>
 
 </html>
