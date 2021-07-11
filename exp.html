@@ -46,9 +46,9 @@
 	<hr>
 		臉黑法超車計算機：
 		<br/>
-		<label>　速度慢的：</label>
+		<label>　速度Ａ：</label>
 		<input type="number" id='slow' value='0' onchange="speedovertake2()"><br>
-		<label>　速度快的：</label>
+		<label>　速度Ｂ：</label>
 		<input type="number" id='fast' value='0' onchange="speedovertake2()"><br>
 		<div >　超車頻率 = <span id='frequency'　 style='font-size:24'> </span></div>		
 		
@@ -87,12 +87,15 @@
 			document.getElementById("overtake_result").innerHTML = Math.floor(speed / 0.9 * 1.1) + 1;
 		}
 
-		function speedovertake2() {
+		function speedovertake2() { //https://forum.gamer.com.tw/C.php?bsn=29220&snA=4898 , by bahamut - Le visage noir (linhua31683)
 			var frequency = document.getElementById("frequency");
 			var slow = document.getElementById("slow").value;
 			var fast = document.getElementById("fast").value;
 			var overtake = 0;
-			for (i = 0; i < 500000; i++) {
+			var c;
+			if (slow > fast){c = slow ; slow = fast ; fast=c;}
+		
+			for (i = 0; i < 500000; i++) {　
 				r1 = Math.random()
 				r2 = Math.random()
 				if (r1 >= 0.5) {
@@ -107,7 +110,7 @@
 				}
 				if (s1 > s2) overtake++;
 			}
-			frequency.innerHTML = overtake / 500000 * 100 + "%";
+			frequency.innerHTML = Math.round(overtake / 500000 * 100 *10000)/10000 + "%";
 		};
     </script>
 
