@@ -583,9 +583,18 @@
                 vit = 0,
                 spd = 0,
                 luk = 0;
+				men = 0;
             reset(0);
             if (a >= 255) document.getElementById("fname").value = 255;
             if (a <= 0) document.getElementById("fname").value = 0;
+			if (a >= 255) {
+			str += 10,
+			int += 10,
+			vit += 10,
+			spd += 10,
+			luk += 10;
+			men += 10;
+			}
             if (att == "sup") {
                 if (a >= 5) hp += 100;
                 if (a >= 15) vit += 10;
@@ -627,6 +636,7 @@
             VIT.innerHTML = 105 + vit;
             SPD.innerHTML = 109 + spd;
             LUK.innerHTML = 111 + luk;
+			MEN.innerHTML = 107 + men;
         }
     </script>
 </html>
